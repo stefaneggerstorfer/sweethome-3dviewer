@@ -1,0 +1,32 @@
+plugins {
+	id 'java'
+	id 'eclipse'
+}
+
+version = '0.0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+	compile files('lib/SweetHome3D-5.5.2.jar')
+	compile 'java3d:j3d-core:1.3.1'
+}
+
+eclipse.classpath.file {
+	whenMerged { classpath -> 
+		classpath.entries.findAll { entry -> entry.path.endsWith 'SweetHome3D-5.5.2.jar' }*.sourcePath = fileReference('lib/SweetHome3D-5.5.2-src.zip')
+	}
+}
+
+task publish(type: Copy) {
+	from jar
+	into System.getenv('APPDATA') + '/eTeks/Sweet Home 3D/plugins'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.2'
+}
