@@ -18,7 +18,6 @@ public class ThreedPlugin extends Plugin {
 		}
 
 		return new PluginAction[] {
-				new ThreedExportAction(getHome()),
 				new ServerStatusAction(server)
 		};
 	}
